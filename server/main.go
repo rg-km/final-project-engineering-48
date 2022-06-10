@@ -2,10 +2,10 @@ package main
 
 import (
 	"database/sql"
+	"server/api"
+	"server/repository"
 
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/rg-km/final-project-engineering-48/server/api"
-	"github.com/rg-km/final-project-engineering-48/server/repository"
 )
 
 func main() {
