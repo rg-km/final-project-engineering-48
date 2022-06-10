@@ -103,3 +103,49 @@ func (u *UserRepository) InsertUser(username string, email string, password stri
 
 	return nil
 }
+
+func (u *UserRepository) Login(username string, password string) (*string, error) {
+	var sqlStmt string
+
+	// query untuk mengambil data user berdasarkan username dan password
+	sqlStmt = `SELECT id, username, email, password, role FROM users WHERE username = ?`
+
+	row := u.db.QueryRow(sqlStmt, username)
+
+	var user User
+	err := row.Scan(
+		&user.ID,
+		&user.Username,
+		&user.Email,
+		&user.Password,
+		&user.Role,
+	)
+
+	if err != nil {
+		return nil, errors.New("Login Failed")
+	}
+
+	// check password
+	hashedPassword := []byte(user.Password)
+	pass := []byte(password)
+	passwordHash := bcrypt.CompareHashAndPassword(hashedPassword, pass)
+	if passwordHash == nil {
+		return &user.Username, nil
+	}
+
+	return nil, errors.New("Invalid Username or Password")
+
+}
+
+func (u *UserRepository) FetchUserRole(username string) (*string, error) {
+	var sqlStmt string
+	var role string
+
+	// query untuk mengambil role user berdasarkan username
+	sqlStmt = `SELECT role FROM users WHERE username = ?`
+
+	row := u.db.QueryRow(sqlStmt, username)
+	err := row.Scan(&role)
+
+	return &role, err
+}

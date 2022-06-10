@@ -1,25 +1,27 @@
 package api
 
 import (
-	"final-project/repository"
 	"fmt"
 	"net/http"
+
+	"github.com/rg-km/final-project-engineering-48/server/repository"
 )
 
 type API struct {
-	usersRepo     repository.UserRepository
-	creationsRepo repository.CreationsRepository
-	mux           *http.ServeMux
+	usersRepo repository.UserRepository
+	mux       *http.ServeMux
 }
 
-func NewAPI(usersRepo repository.UserRepository, creationsRepo repository.CreationsRepository) API {
+func NewAPI(usersRepo repository.UserRepository) API {
 	mux := http.NewServeMux()
 	api := API{
-		usersRepo, creationsRepo, mux,
+		usersRepo, mux,
 	}
 
 	// Handler untuk users
 	mux.Handle("/api/register", api.POST(http.HandlerFunc(api.register)))
+	mux.Handle("/api/login", api.POST(http.HandlerFunc(api.login)))
+	mux.Handle("/api/logout", api.POST(http.HandlerFunc(api.logout)))
 
 	return api
 }
