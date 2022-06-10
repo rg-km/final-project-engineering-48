@@ -1,4 +1,4 @@
-module server
+module github.com/rg-km/final-project-engineering-48/server
 
 go 1.18
 
