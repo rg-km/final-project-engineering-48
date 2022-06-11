@@ -1,16 +1,65 @@
-.wrapper {
-  max-height: 200px;
-  border: 1px solid #ddd;
-  display: -webkit-box;
-  display: -ms-flexbox;
+#slider-container{
+  width: 70%;
+  height: 210px;
+  position: relative;
   display: flex;
-  overflow-x: auto;
-  background-color: #F2CB8A;
+  align-items: center;
+  background-color: #FAF2ED;
+  margin: 0 auto;
+
 }
 
-.wrapper .item {
-  min-width: 190px;
-  height: 190px;
-  line-height: 190px;
+#slider{
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
 }
-/*# sourceMappingURL=listArticle.css.map */
+
+#slider::-webkit-scrollbar{
+  display: none;
+}
+
+h1{
+  text-align: center;
+}
+
+.slider-card{
+  width: 200px;
+  height: 200px;
+  margin-left: 7px;
+  margin-right: 7px;
+  background:  #F2CB8A;
+  border-radius: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.slider-subject{
+  font-weight: bold;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.icon-left, .icon-right {
+  background: white;
+  border-radius: 100%;
+  opacity: 0.25;
+  position: absolute;
+  cursor: pointer;
+}
+
+.icon-left{
+  left: 0;
+}
+
+.icon-right{
+  right: 0;
+}
+
+.slider-icon.left:hover, .slider-icon.right:hover{
+  opacity: 1;
+}
