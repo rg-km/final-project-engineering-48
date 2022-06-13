@@ -21,14 +21,3 @@ type Creation struct {
 	Status    string    `db:"status"`
 	CreatedAt time.Time `db:"created_at"`
 }
-
-type Post struct {
-	ID                 int64  `db:"id"`
-	UserID             int64  `db:"user_id"`
-	UserUsername       string `db:"user_username"`
-	CreationID         int64  `db:"creation_id"`
-	CreationSubject    string `db:"creation_subject"`
-	CreationContent    string `db:"creation_content"`
-	creations_category string `db:"creation_category"`
-	CreationStatus     string `db:"creation_status"`
-}
