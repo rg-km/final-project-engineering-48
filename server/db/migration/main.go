@@ -31,20 +31,6 @@ func main() {
 		status VARCHAR(255) NOT NULL,
 		created_at DATETIME NOT NULL,
 		FOREIGN KEY (user_id) REFERENCES users(id)
-	);
-
-	CREATE TABLE IF NOT EXISTS posts (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		user_id INTEGER NOT NULL,
-		user_username VARCHAR(255) NOT NULL,
-		creations_id INTEGER NOT NULL,
-		creations_subject VARCHAR(255) NOT NULL,
-		creations_content TEXT NOT NULL,
-		creations_category "enum('Science','Horror','Teknologi','Fiksi')" NOT NULL,
-		creations_status VARCHAR(255) NOT NULL,
-		creations_created_at DATETIME NOT NULL,
-		FOREIGN KEY (user_id) REFERENCES users(id),
-		FOREIGN KEY (creations_id) REFERENCES creations(id)
 	);`)
 
 	if err != nil {
