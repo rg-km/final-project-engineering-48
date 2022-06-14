@@ -8,14 +8,15 @@ import (
 )
 
 type API struct {
-	usersRepo repository.UserRepository
-	mux       *http.ServeMux
+	usersRepo    repository.UserRepository
+	articlesRepo repository.ArticleRepository
+	mux          *http.ServeMux
 }
 
-func NewAPI(usersRepo repository.UserRepository) API {
+func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.ArticleRepository) API {
 	mux := http.NewServeMux()
 	api := API{
-		usersRepo, mux,
+		usersRepo, articlesRepo, mux,
 	}
 
 	// Handler untuk users
@@ -23,6 +24,7 @@ func NewAPI(usersRepo repository.UserRepository) API {
 	mux.Handle("/api/login", api.POST(http.HandlerFunc(api.login)))
 	mux.Handle("/api/logout", api.POST(http.HandlerFunc(api.logout)))
 
+	mux.Handle("/api/article", api.GET(http.HandlerFunc(api.articleCategory)))
 	return api
 }
 
