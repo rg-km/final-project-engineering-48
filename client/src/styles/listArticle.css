@@ -24,6 +24,7 @@
 
 h1{
   text-align: center;
+  font: 1.75em 'Roboto', sans-serif;
 }
 
 .slider-card{
@@ -58,8 +59,4 @@ h1{
 
 .icon-right{
   right: 0;
-}
-
-.slider-icon.left:hover, .slider-icon.right:hover{
-  opacity: 1;
 }
