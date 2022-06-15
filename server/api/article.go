@@ -10,7 +10,7 @@ type ArticleErrorResponse struct {
 }
 
 type Article struct {
-	Subject  int    `json:"subject"`
+	Subject  string `json:"subject"`
 	Content  string `json:"content"`
 	Category string `json:"category"`
 }
@@ -19,7 +19,7 @@ type ArticleSuccessResponse struct {
 	Articles []Article `json:"Articles"`
 }
 
-func (api *API) articleCategory(w http.ResponseWriter, req *http.Request) {
+func (api *API) getArticleCategory(w http.ResponseWriter, req *http.Request) {
 	api.AllowOrigin(w, req)
 	category, err := api.articlesRepo.FetchArticleCategory()
 	encoder := json.NewEncoder(w)
@@ -30,5 +30,5 @@ func (api *API) articleCategory(w http.ResponseWriter, req *http.Request) {
 		}
 	}()
 
-	encoder.Encode(ArticleSuccessResponse{Category: category})
+	encoder.Encode(category)
 }
