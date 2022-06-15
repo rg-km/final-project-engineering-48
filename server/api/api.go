@@ -19,12 +19,13 @@ func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.Article
 		usersRepo, articlesRepo, mux,
 	}
 
-	// Handler untuk users
+	// Handler untuk users (dengan middleware)
 	mux.Handle("/api/register", api.POST(http.HandlerFunc(api.register)))
 	mux.Handle("/api/login", api.POST(http.HandlerFunc(api.login)))
 	mux.Handle("/api/logout", api.POST(http.HandlerFunc(api.logout)))
 
-	mux.Handle("/api/article", api.GET(http.HandlerFunc(api.articleCategory)))
+	// Handler untuk guest (tanpa middleware)
+	mux.Handle("/api/article/category", api.GET(http.HandlerFunc(api.getArticleCategory)))
 	return api
 }
 

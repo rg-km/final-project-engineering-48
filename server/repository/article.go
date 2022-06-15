@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"errors"
 )
 
 type ArticleRepository struct {
@@ -34,15 +35,31 @@ func (p *ArticleRepository) FetcharticleByID(id int64) (Creation, error) {
 	return article, nil
 }
 
-func (u *ArticleRepository) FetchArticleCategory() (*string, error) {
+func (u *ArticleRepository) FetchArticleCategory() ([]string, error) {
 	var sqlStmt string
-	var category string
+	categories := []string{}
 
 	// query untuk mengambil category article
-	sqlStmt = `SELECT category FROM creations`
+	sqlStmt = `SELECT DISTINCT category FROM creations`
 
-	row := u.db.QueryRow(sqlStmt)
-	err := row.Scan(&category)
+	rows, err := u.db.Query(sqlStmt)
+	if err != nil {
+		return nil, errors.New("Error fetching article category")
+	}
+	defer rows.Close()
 
-	return &category, err
+	var creation Creation
+	for rows.Next() {
+		err := rows.Scan(
+			&creation.category,
+		)
+
+		if err != nil {
+			return nil, err
+		}
+
+		categories = append(categories, creation.category)
+	}
+
+	return categories, nil
 }
