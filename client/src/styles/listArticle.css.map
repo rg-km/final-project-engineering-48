@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,CAAA;EACF,UAAU,EAAE,KAAK;EACjB,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,UAAU,EAAE,IAAI;EAChB,gBAAgB,EAAE,OAAO;CAO9B;;AAZD,AAOM,QAPE,CAOF,KAAK,CAAA;EACH,SAAS,EAAE,KAAK;EAChB,MAAM,EAAE,KAAK;EACb,WAAW,EAAE,KAAK;CACnB",
-    "sources": [
-        "listArticle.scss"
-    ],
-    "names": [],
-    "file": "listArticle.css"
-}
