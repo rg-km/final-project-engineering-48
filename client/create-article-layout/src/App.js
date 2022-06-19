@@ -22,11 +22,11 @@ function App() {
       message: "Apakah anda yakin ingin menyimpan data ini?",
       buttons: [
         {
-          label: "Yes",
+          label: "Ya",
           onClick: () => console.log(data),
         },
         {
-          label: "No",
+          label: "Tidak",
           //onClick: () => alert("Click No"),
         },
       ],
@@ -49,11 +49,11 @@ function App() {
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item active">
+              {/* <li className="nav-item active">
                 <a className="nav-link" href="#">
                   Home
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <a className="nav-link" href="#">
                   Writing
