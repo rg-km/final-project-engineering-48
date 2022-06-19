@@ -52,6 +52,11 @@ h1 {
   text-align: center;
 }
 
+textarea {
+  width: 300px;
+  resize: vertical;
+}
+
 .form-control {
   margin-bottom: 20px;
   margin-top: 6px;
