@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"strings"
 
 	"github.com/golang-jwt/jwt"
 )
@@ -28,26 +29,19 @@ func (api *API) AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		api.AllowOrigin(w, r)
 		encoder := json.NewEncoder(w)
-		// ambil token dari cookie
-		c, err := r.Cookie("token")
-		if err != nil {
-			if err == http.ErrNoCookie {
-				w.WriteHeader(http.StatusUnauthorized)
-				encoder.Encode(AuthErrorResponse{Error: err.Error()})
-				return
-			}
-			// return bad request ketika field token tidak ada
-			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		token := r.Header.Get("Authorization")
+		if token == "" {
+			w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: "Token not valid"})
 			return
 		}
-
-		tokenString := c.Value
+		tokenSplit := strings.Split(token, " ")
+		jwtToken := tokenSplit[1]
 
 		claims := &CLaims{}
 
 		// parse JWT token ke dalam claims
-		tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		tkn, err := jwt.ParseWithClaims(jwtToken, claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
 
