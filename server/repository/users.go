@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+	"strings"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -16,21 +17,28 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 	return &UserRepository{db: db}
 }
 
-func (u *UserRepository) FetchUserByUsername(username string) (User, error) {
+func (u *UserRepository) FetchUsername(username string) (User, error) {
 	var sqlStmt string
 	var user User
 
-	// query untuk mengambil data user berdasarkan username
-	sqlStmt = `SELECT id, username, email, password, role FROM users WHERE username = ?`
+	// query untuk mengambil data username user berdasarkan username
+	sqlStmt = `SELECT username FROM users WHERE username = ?`
 
 	row := u.db.QueryRow(sqlStmt, username)
-	err := row.Scan(
-		&user.ID,
-		&user.Username,
-		&user.Email,
-		&user.Password,
-		&user.Role,
-	)
+	err := row.Scan(&user.Username)
+
+	return user, err
+}
+
+func (u *UserRepository) FetchEmail(email string) (User, error) {
+	var sqlStmt string
+	var user User
+
+	// query untuk mengambil data email user berdasarkan email
+	sqlStmt = `SELECT email FROM users WHERE email = ?`
+
+	row := u.db.QueryRow(sqlStmt, email)
+	err := row.Scan(&user.Email)
 
 	return user, err
 }
@@ -82,16 +90,28 @@ func (u *UserRepository) InsertUser(username string, email string, password stri
 		return errors.New("Password must be 6-12 characters")
 	}
 
+	// check exists username
+	user, _ := u.FetchUsername(username)
+	if user.Username != "" {
+		return errors.New("Username already exists")
+	}
+
+	// check exists email
+	user, _ = u.FetchEmail(email)
+	if user.Email != "" {
+		return errors.New("Email already exists")
+	}
+
+	// check password contains space
+	checkPassword := strings.Contains(password, " ")
+	if checkPassword {
+		return errors.New("Password must not contain space")
+	}
+
 	// set default untuk kolom role, loggedin
 	defaultRole := "user"
 	// hash password
 	hashPassword, _ := HashPassword(password)
-
-	// check apakah username sudah ada
-	user, _ := u.FetchUserByUsername(username)
-	if user.Username != "" {
-		return errors.New("Username already exists")
-	}
 
 	// query untuk insert data user
 	sqlStmt = `INSERT INTO users (username, email, password, role, created_at) VALUES (?, ?, ?, ?, ?)`

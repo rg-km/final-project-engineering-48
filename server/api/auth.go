@@ -19,6 +19,16 @@ type LoginSuccessResponse struct {
 	Token    string `json:"token"`
 }
 
+type Register struct {
+	Username string `json:"username"`
+	Email    string `json:"email"`
+}
+
+type RegisterSuccessResponse struct {
+	Message string   `json:"message"`
+	Data    Register `json:"data"`
+}
+
 type AuthErrorResponse struct {
 	Error string `json:"error"`
 }
@@ -48,6 +58,18 @@ func (api *API) register(w http.ResponseWriter, req *http.Request) {
 		encoder.Encode(AuthErrorResponse{Error: err.Error()})
 		return
 	}
+
+	register := Register{
+		Username: user.Username,
+		Email:    user.Email,
+	}
+
+	registerResponse := RegisterSuccessResponse{
+		Message: "register success",
+		Data:    register,
+	}
+
+	json.NewEncoder(w).Encode(registerResponse)
 }
 
 func (api *API) login(w http.ResponseWriter, req *http.Request) {
