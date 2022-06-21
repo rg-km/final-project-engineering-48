@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 type ArticleErrorResponse struct {
@@ -108,6 +109,26 @@ func (api *API) arsipArticle(w http.ResponseWriter, r *http.Request) {
 func (api *API) getArticle(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
 	article, err := api.articlesRepo.FetchArticle()
+	encoder := json.NewEncoder(w)
+	w.Header().Set("Content-Type", "application/json")
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(ArticleErrorResponse{Error: err.Error()})
+		}
+	}()
+	articleResponse := ArticleSuccessResponse{
+		Message: "success",
+		Data:    article,
+	}
+
+	encoder.Encode(articleResponse)
+}
+
+func (api *API) getArticleDetail(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	id, _ := strconv.ParseInt(r.URL.Query().Get("id"), 0, 64)
+	article, err := api.articlesRepo.FetcharticleByID(id)
 	encoder := json.NewEncoder(w)
 	w.Header().Set("Content-Type", "application/json")
 	defer func() {

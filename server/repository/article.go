@@ -19,15 +19,19 @@ func (p *ArticleRepository) FetcharticleByID(id int64) (Creation, error) {
 	var article Creation
 
 	// query untuk mengambil data article berdasarkan id
-	sqlStmt = `SELECT id, user_id, subject, content, category FROM creations WHERE id = ?`
+	sqlStmt = `SELECT c.id, u.id, u.username, c.subject, c.content, c.category, c.created_at
+	FROM users u
+	LEFT JOIN creations c ON u.id = c.user_id WHERE u.id = ? AND c.status = "publish"`
 
 	row := p.db.QueryRow(sqlStmt, id)
 	err := row.Scan(
 		&article.ID,
 		&article.UserID,
+		&article.UserUsername,
 		&article.Subject,
 		&article.Content,
-		&article.category,
+		&article.Category,
+		&article.CreatedAt,
 	)
 	if err != nil {
 		return article, err
@@ -52,14 +56,14 @@ func (u *ArticleRepository) FetchArticleCategory() ([]string, error) {
 	var creation Creation
 	for rows.Next() {
 		err := rows.Scan(
-			&creation.category,
+			&creation.Category,
 		)
 
 		if err != nil {
 			return nil, err
 		}
 
-		categories = append(categories, creation.category)
+		categories = append(categories, creation.Category)
 	}
 
 	return categories, nil
@@ -87,7 +91,7 @@ func (u *ArticleRepository) FetchArticle() ([]Creation, error) {
 			&creation.UserUsername,
 			&creation.UserID,
 			&creation.Subject,
-			&creation.category,
+			&creation.Category,
 		)
 
 		if err != nil {
