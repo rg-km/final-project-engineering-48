@@ -20,12 +20,8 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< HEAD
         <ListArticle/>
         <ListCategory/>
-=======
-        <ListArticle list = {list}/>
->>>>>>> 0e104890f8664c6986e61a76f90d3f75988c8899
     </div>
   );
 }
