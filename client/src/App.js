@@ -1,4 +1,11 @@
+import CreateArticle from "./components/createArticle";
 import ListArticle from "./components/listArticle";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "jquery/dist/jquery.min.js";
+import "bootstrap/dist/js/bootstrap.min.js";
+
+
 
 function App() {
 
@@ -17,9 +24,75 @@ function App() {
     {username: "user12", subject: "The Lion King", category: "fantasy"},
 ];
 
+  const NAVBAR = {
+    backgroundColor: "#F2CB8A",
+  }
+
+  // const IMAGE = {
+  //   textAlign: "center",
+  //   justifyContent: "center",
+  // }
   return (
     <div className="App">
+      {/* navbar */}
+      <div className="main-wrappe" style={NAVBAR}>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-navnew static-top mb-5 shadow">
+        <div className="container">
+          <a className="navbar-brand" href="#">
+            TulisAja
+          </a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ms-auto">
+              {/* <li className="nav-item active">
+                <a className="nav-link" href="#">
+                  Home
+                </a>
+              </li> */}
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Writing
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Reading
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  About
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      </div>
+
+        <h1>LET'S ENJOY THIS VAST READ AND WRITE UNIVERSE</h1> <br></br>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+        <img src={require('../src/assets/landing.png')} className="landing-image"/><br></br><br></br><br></br><br></br>
+        </div>     
+
+        <br></br><br></br><br></br><br></br>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+        <button style={{backgroundColor:"#F2CB8A", borderRadius:"50%", margin:"50px" , width:"100px", height:"50px"}}>LOG IN</button>
+        <button style={{backgroundColor:"#F2CB8A", borderRadius:"50%", margin:"50px",  width:"100px", height:"50px"}}>REGISTER</button>
+        </div>
+        
+
         <ListArticle list = {list}/>
+        <br></br><br></br><br></br>
+        <CreateArticle/>
+        <br></br><br></br><br></br>
+
+        {/* footer */}
+        <footer className="fixed-bottom bg-navnew" style={NAVBAR}>
+        <div className="text-center p-3 text-white">© Engineering48 | Ruangguru | 2022</div>
+      </footer>
     </div>
   );
 }
