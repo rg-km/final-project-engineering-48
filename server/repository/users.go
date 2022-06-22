@@ -90,14 +90,14 @@ func (u *UserRepository) InsertUser(username string, email string, password stri
 		return errors.New("Password must be 6-12 characters")
 	}
 
-	// check exists username
+	// check already exist username
 	user, _ := u.FetchUsername(username)
 	if user.Username != "" {
 		return errors.New("Username already exists")
 	}
 
-	// check exists email
 	user, _ = u.FetchEmail(email)
+	// check already email
 	if user.Email != "" {
 		return errors.New("Email already exists")
 	}
@@ -168,4 +168,17 @@ func (u *UserRepository) FetchUserRole(username string) (*string, error) {
 	err := row.Scan(&role)
 
 	return &role, err
+}
+
+func (u *UserRepository) FetchUserID(username string) (*int64, error) {
+	var sqlStmt string
+	var id int64
+
+	// query untuk mengambil id user berdasarkan username
+	sqlStmt = `SELECT id FROM users WHERE username = ?`
+
+	row := u.db.QueryRow(sqlStmt, username)
+	err := row.Scan(&id)
+
+	return &id, err
 }

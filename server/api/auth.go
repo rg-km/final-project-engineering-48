@@ -15,8 +15,8 @@ type User struct {
 }
 
 type LoginSuccessResponse struct {
-	Username string `json:"username"`
-	Token    string `json:"token"`
+	Message string `json:"message"`
+	Token   string `json:"token"`
 }
 
 type Register struct {
@@ -37,6 +37,7 @@ type AuthErrorResponse struct {
 var jwtKey = []byte("key")
 
 type CLaims struct {
+	ID       int64
 	Username string
 	Role     string
 	jwt.StandardClaims
@@ -92,10 +93,12 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 	}
 
 	userRole, _ := api.usersRepo.FetchUserRole(*res)
+	userId, _ := api.usersRepo.FetchUserID(*res)
 
 	expirationTime := time.Now().Add(60 * time.Minute)
 
 	claims := &CLaims{
+		ID:       *userId,
 		Username: *res,
 		Role:     *userRole,
 		StandardClaims: jwt.StandardClaims{
@@ -118,7 +121,12 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 		Path:    "/",
 	})
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: *res, Token: tokenString})
+	loginResponse := LoginSuccessResponse{
+		Message: "login success",
+		Token:   tokenString,
+	}
+
+	json.NewEncoder(w).Encode(loginResponse)
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
