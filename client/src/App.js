@@ -4,6 +4,8 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
+import { NavLink, Route, Routes} from "react-router-dom";
+import ListCategory from "./components/listCategory";
 
 
 
@@ -57,9 +59,10 @@ function App() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+              <NavLink
+                to="/ListCategory">
                   Reading
-                </a>
+              </NavLink>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
@@ -72,6 +75,10 @@ function App() {
       </nav>
       </div>
 
+      <Routes>
+        <Route path="/ListCategory" element={<ListCategory />} />
+      </Routes>
+{/* 
         <h1>LET'S ENJOY THIS VAST READ AND WRITE UNIVERSE</h1> <br></br>
         <div style={{ display: "flex", justifyContent: "center" }}>
         <img src={require('../src/assets/landing.png')} className="landing-image"/><br></br><br></br><br></br><br></br>
@@ -87,7 +94,7 @@ function App() {
         <ListArticle list = {list}/>
         <br></br><br></br><br></br>
         <CreateArticle/>
-        <br></br><br></br><br></br>
+        <br></br><br></br><br></br> */}
 
         {/* footer */}
         <footer className="fixed-bottom bg-navnew" style={NAVBAR}>
