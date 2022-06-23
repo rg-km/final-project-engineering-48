@@ -21,7 +21,7 @@ func (p *ArticleRepository) FetcharticleByID(id int64) (Creation, error) {
 	// query untuk mengambil data article berdasarkan id
 	sqlStmt = `SELECT c.id, u.id, u.username, c.subject, c.content, c.category, c.created_at
 	FROM users u
-	LEFT JOIN creations c ON u.id = c.user_id WHERE u.id = ? AND c.status = "publish"`
+	LEFT JOIN creations c ON u.id = c.user_id WHERE c.id = ? AND c.status = "publish"`
 
 	row := p.db.QueryRow(sqlStmt, id)
 	err := row.Scan(
@@ -74,7 +74,7 @@ func (u *ArticleRepository) FetchArticle() ([]Creation, error) {
 	var creations []Creation
 
 	// query untuk mengambil category article
-	sqlStmt = `SELECT u.id, u.username, c.id, c.subject, c.category
+	sqlStmt = `SELECT c.id, u.username, u.id, c.subject, c.category
 	FROM users u
 	LEFT JOIN creations c ON u.id = c.user_id WHERE c.status = "publish"`
 
