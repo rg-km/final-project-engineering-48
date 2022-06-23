@@ -18,7 +18,7 @@ type Creation struct {
 	UserUsername string    `db:"user_username"`
 	Subject      string    `db:"subject"`
 	Content      string    `db:"content"`
-	category     string    `db:"category"`
+	Category     string    `db:"category"`
 	Status       string    `db:"status"`
 	CreatedAt    time.Time `db:"created_at"`
 }
