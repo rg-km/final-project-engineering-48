@@ -17,6 +17,7 @@ type User struct {
 type LoginSuccessResponse struct {
 	Message string `json:"message"`
 	Token   string `json:"token"`
+	Role    string `json:"role"`
 }
 
 type Register struct {
@@ -124,6 +125,7 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 	loginResponse := LoginSuccessResponse{
 		Message: "login success",
 		Token:   tokenString,
+		Role:    *userRole,
 	}
 
 	json.NewEncoder(w).Encode(loginResponse)
