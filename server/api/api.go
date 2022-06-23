@@ -32,6 +32,7 @@ func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.Article
 	mux.Handle("/api/article/category", api.GET(http.HandlerFunc(api.getArticleCategory)))
 	mux.Handle("/api/article/list", api.GET(http.HandlerFunc(api.getArticle)))
 	mux.Handle("/api/article/detail", api.GET(http.HandlerFunc(api.getArticleDetail)))
+	mux.Handle("/api/article/list/category", api.GET(http.HandlerFunc(api.getArticleByCategory)))
 	return api
 }
 

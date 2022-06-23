@@ -71,7 +71,7 @@ func (u *ArticleRepository) FetchArticleCategory() ([]string, error) {
 
 func (u *ArticleRepository) FetchArticle() ([]Creation, error) {
 	var sqlStmt string
-	var creations []Creation
+	var creations []Creation = make([]Creation, 0)
 
 	// query untuk mengambil category article
 	sqlStmt = `SELECT c.id, u.username, u.id, c.subject, c.category
@@ -107,6 +107,20 @@ func (u *ArticleRepository) FetchArticle() ([]Creation, error) {
 func (u *ArticleRepository) InsertIntoPublish(user_id int64, subject, content, category string) error {
 	var sqlStmt string
 	status := "publish"
+	mapCategory := map[string]bool{
+		"Science":   true,
+		"Horror":    true,
+		"Teknologi": true,
+		"Fiksi":     true,
+	}
+
+	if subject == "" || content == "" {
+		return errors.New("Column must fill")
+	}
+
+	if !mapCategory[category] {
+		return errors.New("No Category Available")
+	}
 
 	// query untuk memasukkan data article ke tabel
 	sqlStmt = `INSERT INTO creations (user_id, subject, content, category, status, created_at) VALUES (?, ?, ?, ?, ?, ?)`
@@ -122,6 +136,20 @@ func (u *ArticleRepository) InsertIntoPublish(user_id int64, subject, content, c
 func (u *ArticleRepository) InsertIntoArsip(user_id int64, subject, content, category string) error {
 	var sqlStmt string
 	status := "arsip"
+	mapCategory := map[string]bool{
+		"Science":   true,
+		"Horror":    true,
+		"Teknologi": true,
+		"Fiksi":     true,
+	}
+
+	if subject == "" || content == "" {
+		return errors.New("Column must fill")
+	}
+
+	if !mapCategory[category] {
+		return errors.New("No Category Available")
+	}
 
 	// query untuk memasukkan data article ke tabel
 	sqlStmt = `INSERT INTO creations (user_id, subject, content, category, status, created_at) VALUES (?, ?, ?, ?, ?, ?)`
@@ -132,4 +160,39 @@ func (u *ArticleRepository) InsertIntoArsip(user_id int64, subject, content, cat
 	}
 
 	return nil
+}
+
+func (u *ArticleRepository) FetcharticleByCategory(category string) ([]Creation, error) {
+	var sqlStmt string
+	var creations []Creation = make([]Creation, 0)
+
+	// query untuk mengambil article
+	sqlStmt = `SELECT c.id, u.username, u.id, c.subject, c.category
+	FROM users u
+	LEFT JOIN creations c ON u.id = c.user_id WHERE c.category = ? AND c.status = "publish"`
+
+	rows, err := u.db.Query(sqlStmt, category)
+	if err != nil {
+		return nil, errors.New("Error fetching article")
+	}
+	defer rows.Close()
+
+	var creation Creation
+	for rows.Next() {
+		err := rows.Scan(
+			&creation.ID,
+			&creation.UserUsername,
+			&creation.UserID,
+			&creation.Subject,
+			&creation.Category,
+		)
+
+		if err != nil {
+			return nil, err
+		}
+
+		creations = append(creations, creation)
+	}
+
+	return creations, nil
 }
