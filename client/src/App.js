@@ -6,25 +6,48 @@ import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { NavLink, Route, Routes} from "react-router-dom";
 import ListCategory from "./components/listCategory";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 
 
 function App() {
 
-  const list = [
-    {username: "user1", subject: "Little Mermaid",category: "fantasy"},
-    {username: "user2", subject: "Titanic", category: "drama"},
-    {username: "user3", subject: "The Lion King", category: "fantasy"},
-    {username: "user4", subject: "The Little Mermaid", category: "fantasy"},
-    {username: "user5", subject: "Titanic", category: "drama"},
-    {username: "user6", subject: "The Lion King", category: "fantasy"},
-    {username: "user7", subject: "The Little Mermaid", category: "fantasy"},
-    {username: "user8", subject: "Titanic", category: "drama"},
-    {username: "user9", subject: "The Lion King", category: "fantasy"},
-    {username: "user10", subject: "The Little Mermaid", category: "fantasy"},
-    {username: "user11", subject: "Titanic", category: "drama"},
-    {username: "user12", subject: "The Lion King", category: "fantasy"},
-];
+//   const list = [
+//     {username: "user1", subject: "Little Mermaid",category: "fantasy"},
+//     {username: "user2", subject: "Titanic", category: "drama"},
+//     {username: "user3", subject: "The Lion King", category: "fantasy"},
+//     {username: "user4", subject: "The Little Mermaid", category: "fantasy"},
+//     {username: "user5", subject: "Titanic", category: "drama"},
+//     {username: "user6", subject: "The Lion King", category: "fantasy"},
+//     {username: "user7", subject: "The Little Mermaid", category: "fantasy"},
+//     {username: "user8", subject: "Titanic", category: "drama"},
+//     {username: "user9", subject: "The Lion King", category: "fantasy"},
+//     {username: "user10", subject: "The Little Mermaid", category: "fantasy"},
+//     {username: "user11", subject: "Titanic", category: "drama"},
+//     {username: "user12", subject: "The Lion King", category: "fantasy"},
+// ];
+
+const [listAr, setListAr] = useState([])
+
+  async function fetchArticle() {
+    try {
+      const respond = await axios.get('http://localhost:8080/api/article/list');
+      console.log(respond.data.data)
+      setListAr(respond.data.data)
+
+    } catch (error) {
+      console.log("can't fetch article", error);
+    }
+  }
+
+  useEffect(() => {
+    
+    fetchArticle()
+  }, [])
+
+  const list = listAr ; 
+  // console.log(list, "ini list postingan")
 
   const NAVBAR = {
     backgroundColor: "#F2CB8A",
@@ -59,10 +82,9 @@ function App() {
                 </a>
               </li>
               <li className="nav-item">
-              <NavLink
-                to="/ListCategory">
+              <a className="nav-link" href="/ListCategory">
                   Reading
-              </NavLink>
+              </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
@@ -75,10 +97,10 @@ function App() {
       </nav>
       </div>
 
-      <Routes>
+      {/* <Routes>
         <Route path="/ListCategory" element={<ListCategory />} />
-      </Routes>
-{/* 
+      </Routes> */}
+
         <h1>LET'S ENJOY THIS VAST READ AND WRITE UNIVERSE</h1> <br></br>
         <div style={{ display: "flex", justifyContent: "center" }}>
         <img src={require('../src/assets/landing.png')} className="landing-image"/><br></br><br></br><br></br><br></br>
@@ -94,7 +116,8 @@ function App() {
         <ListArticle list = {list}/>
         <br></br><br></br><br></br>
         <CreateArticle/>
-        <br></br><br></br><br></br> */}
+        <br></br><br></br><br></br>
+        {/* <ListCategory/> */}
 
         {/* footer */}
         <footer className="fixed-bottom bg-navnew" style={NAVBAR}>
