@@ -1,15 +1,13 @@
 import CreateArticle from "./components/createArticle";
 import ListArticle from "./components/listArticle";
-<<<<<<< HEAD
-import ListCategory from "./components/listCategory";
-=======
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
+import { NavLink, Route, Routes} from "react-router-dom";
+import ListCategory from "./components/listCategory";
 
 
->>>>>>> e24d9bad8174582c38dd1cb7baf17345f4268ea6
 
 function App() {
 
@@ -38,10 +36,6 @@ function App() {
   // }
   return (
     <div className="App">
-<<<<<<< HEAD
-        <ListArticle/>
-        <ListCategory/>
-=======
       {/* navbar */}
       <div className="main-wrappe" style={NAVBAR}>
       <nav className="navbar navbar-expand-lg navbar-dark bg-navnew static-top mb-5 shadow">
@@ -65,9 +59,10 @@ function App() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+              <NavLink
+                to="/ListCategory">
                   Reading
-                </a>
+              </NavLink>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
@@ -80,6 +75,10 @@ function App() {
       </nav>
       </div>
 
+      <Routes>
+        <Route path="/ListCategory" element={<ListCategory />} />
+      </Routes>
+{/* 
         <h1>LET'S ENJOY THIS VAST READ AND WRITE UNIVERSE</h1> <br></br>
         <div style={{ display: "flex", justifyContent: "center" }}>
         <img src={require('../src/assets/landing.png')} className="landing-image"/><br></br><br></br><br></br><br></br>
@@ -95,13 +94,12 @@ function App() {
         <ListArticle list = {list}/>
         <br></br><br></br><br></br>
         <CreateArticle/>
-        <br></br><br></br><br></br>
+        <br></br><br></br><br></br> */}
 
         {/* footer */}
         <footer className="fixed-bottom bg-navnew" style={NAVBAR}>
         <div className="text-center p-3 text-white">© Engineering48 | Ruangguru | 2022</div>
       </footer>
->>>>>>> e24d9bad8174582c38dd1cb7baf17345f4268ea6
     </div>
   );
 }
