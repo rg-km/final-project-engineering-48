@@ -92,7 +92,7 @@ function App() {
                 />
                 {errors.judul && <small className="text-danger">{errors.judul.message}</small>}
               </div>
-              {/* Tipe */}
+              {/* Tipe
               <div className="form-group">
                 <label className="col-form-label">Tipe :</label>
                 <input
@@ -104,7 +104,7 @@ function App() {
                   }}
                 />
                 {errors.tipe && <small className="text-danger">{errors.tipe.message}</small>}
-              </div>
+              </div> */}
               {/* Genre */}
               {/* <div className="form-group">
                 <label className="col-form-label">Genre :</label>
