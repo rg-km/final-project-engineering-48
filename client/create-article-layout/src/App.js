@@ -92,7 +92,6 @@ function App() {
                 />
                 {errors.judul && <small className="text-danger">{errors.judul.message}</small>}
               </div>
-
               {/* Tipe */}
               <div className="form-group">
                 <label className="col-form-label">Tipe :</label>
@@ -106,9 +105,8 @@ function App() {
                 />
                 {errors.tipe && <small className="text-danger">{errors.tipe.message}</small>}
               </div>
-
               {/* Genre */}
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label className="col-form-label">Genre :</label>
                 <input
                   type="text"
@@ -119,7 +117,23 @@ function App() {
                   }}
                 />
                 {errors.genre && <small className="text-danger">{errors.genre.message}</small>}
-              </div>
+              </div> */}
+
+              {/* Kategori */}
+              <label className="col-form-label">Kategori :</label>
+              <select
+                className="form-select form-select-lg mb-3"
+                aria-label=".form-select-lg Kategori"
+                onChange={(e) => {
+                  console.log(e);
+                }}
+              >
+                <option selected>Pilih Kategori</option>
+                <option value="science">Science</option>
+                <option value="horror">Horror</option>
+                <option value="technology">Technology</option>
+                <option value="fiction">Fiction</option>
+              </select>
 
               {/* Isi */}
               <div className="form-group">
@@ -143,7 +157,6 @@ function App() {
                 ></textarea>
                 {errors.isi && <small className="text-danger">{errors.isi.message}</small>}
               </div>
-
               {/* Submit */}
               <input type="submit" className="btn bg-navnew my-3 submit" value="Submit" />
             </form>
