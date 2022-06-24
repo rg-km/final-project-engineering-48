@@ -53,7 +53,7 @@ export default function CreateArticle(props) {
               <input
                 type="text"
                 className={`form-control ${errors.judul && "invalid"}`}
-                {...register("judul", { required: "Judul is Required" })}
+                {...register("judul", { required: "Judul harus diisi" })}
                 onKeyUp={() => {
                   trigger("judul");
                 }}
@@ -66,16 +66,19 @@ export default function CreateArticle(props) {
             <select
               className="form-select form-select-lg mb-3"
               aria-label=".form-select-lg Kategori"
+              {...register("kategori", { required: "Kategori harus diisi" })}
               onChange={(e) => {
-                console.log(e);
+                console.log(e.target.value);
+                trigger("kategori");
               }}
             >
-              <option selected>Pilih Kategori</option>
+              <option value="">Pilih Kategori</option>
               <option value="science">Science</option>
               <option value="horror">Horror</option>
               <option value="technology">Technology</option>
               <option value="fiction">Fiction</option>
             </select>
+            {errors.kategori && <small className="text-danger">{errors.kategori.message}</small>}
 
             {/* Isi */}
             <div className="form-group">
@@ -83,7 +86,7 @@ export default function CreateArticle(props) {
               <textarea
                 className={`form-control ${errors.isi && "invalid"}`}
                 {...register("isi", {
-                  required: "Isi is Required",
+                  required: "Isi harus diisi",
                   minLength: {
                     value: 10,
                     message: "Minimum Required length is 10",
