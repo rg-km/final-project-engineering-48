@@ -23,8 +23,8 @@ export default function ListArticle(props){
                   props.list.map((slide,index)=>{
                           return(
                               <div className="slider-card" key={index} onClick={()=>slide.clickEvent()}>
-                                  <p className="slider-subject">{slide.Subject}</p>
-                                  <p className="slider-category">genre : {slide.category}</p>
+                                  <p className="slider-subject">{slide.Subject}</p><br></br>
+                                  <p className="slider-category">genre : {slide.Category}</p>
                                   <p className="slider-username">by : {slide.UserUsername}</p>
                               </div>
                           )
