@@ -2,6 +2,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import axios from "axios";
 
 export default function CreateArticle(props) {
   const {
@@ -19,7 +20,7 @@ export default function CreateArticle(props) {
       buttons: [
         {
           label: "Ya",
-          onClick: () => console.log(data),
+          onClick: () => kirim(data),
         },
         {
           label: "Tidak",
@@ -27,6 +28,30 @@ export default function CreateArticle(props) {
         },
       ],
     });
+  };
+
+  const kirim = (mydata) => {
+    let url = "http://localhost:8080/api/article/publish";
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    };
+    let data = {
+      subject: mydata["judul"],
+      content: mydata["isi"],
+      category: mydata["kategori"],
+    };
+    axios.post(url, data, config).then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   const CREATE_LAYOUT = {
