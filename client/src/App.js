@@ -4,7 +4,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
-import { NavLink, Route, Routes} from "react-router-dom";
+import { NavLink, Route, Routes, Link} from "react-router-dom";
 import ListCategory from "./components/listCategory";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
@@ -33,7 +33,6 @@ const [listAr, setListAr] = useState([])
   async function fetchArticle() {
     try {
       const respond = await axios.get('http://localhost:8080/api/article/list');
-      console.log(respond.data.data)
       setListAr(respond.data.data)
 
     } catch (error) {
@@ -82,8 +81,8 @@ const [listAr, setListAr] = useState([])
                 </a>
               </li>
               <li className="nav-item">
-              <a className="nav-link" href="/ListCategory">
-                  Reading
+              <a className="nav-link" href="#create">
+                <Link to="/ListCategory">Reading</Link>
               </a>
               </li>
               <li className="nav-item">
@@ -97,9 +96,6 @@ const [listAr, setListAr] = useState([])
       </nav>
       </div>
 
-      {/* <Routes>
-        <Route path="/ListCategory" element={<ListCategory />} />
-      </Routes> */}
 
         <h1>LET'S ENJOY THIS VAST READ AND WRITE UNIVERSE</h1> <br></br>
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -112,10 +108,13 @@ const [listAr, setListAr] = useState([])
         <button style={{backgroundColor:"#F2CB8A", borderRadius:"50%", margin:"50px",  width:"100px", height:"50px"}}>REGISTER</button>
         </div>
         
+      <Routes>
+        <Route path="/ListCategory" element={<ListCategory />} />
+      </Routes>
 
         <ListArticle list = {list}/>
         <br></br><br></br><br></br>
-        <CreateArticle/>
+        <CreateArticle id="create"/>
         <br></br><br></br><br></br>
         {/* <ListCategory/> */}
 

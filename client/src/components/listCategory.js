@@ -19,8 +19,8 @@ export default function ListCategory(props) {
       }, []);
    
       const getProducts = async () => {
-          const response = await axios.get('https://reqres.in/api/users/2');
-          setProduct(response.data);
+          const response = await axios.get('http://localhost:8080/api/article/category');
+          setProduct(response.data.data);
       }
 
       return (
@@ -32,7 +32,7 @@ export default function ListCategory(props) {
                     <Card style={{ width: '18rem', border: 'transparent' }}>
                         <Card.Img variant="top" src="https://www.pngall.com/wp-content/uploads/2016/03/Book-PNG.png" />
                         <Card.Body>
-                            <Card.Title className="text-center" style={{fontWeight: "bold"}}>{product.email}</Card.Title>
+                            <Card.Title className="text-center" style={{fontWeight: "bold"}}>{product}</Card.Title>
                         </Card.Body>
                         </Card>
                     </div>
