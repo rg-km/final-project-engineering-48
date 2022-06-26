@@ -6,8 +6,10 @@ import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { NavLink, Route, Routes, Link} from "react-router-dom";
 import ListCategory from "./components/listCategory";
+import detailArticles from "./components/detailArticle";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import DetailArticle from "./components/detailArticle";
 
 
 
@@ -33,6 +35,7 @@ const [listAr, setListAr] = useState([])
   async function fetchArticle() {
     try {
       const respond = await axios.get('http://localhost:8080/api/article/list');
+      console.log(respond.data.data)
       setListAr(respond.data.data)
 
     } catch (error) {
@@ -70,11 +73,6 @@ const [listAr, setListAr] = useState([])
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ms-auto">
-              {/* <li className="nav-item active">
-                <a className="nav-link" href="#">
-                  Home
-                </a>
-              </li> */}
               <li className="nav-item">
                 <a className="nav-link" href="#">
                   Writing
@@ -108,12 +106,15 @@ const [listAr, setListAr] = useState([])
         <button style={{backgroundColor:"#F2CB8A", borderRadius:"50%", margin:"50px",  width:"100px", height:"50px"}}>REGISTER</button>
         </div>
         
-      <Routes>
-        <Route path="/ListCategory" element={<ListCategory />} />
-      </Routes>
 
         <ListArticle list = {list}/>
         <br></br><br></br><br></br>
+      <Routes>
+        <Route path="/ListCategory" element={<DetailArticle />} />
+      </Routes>
+      {/* <Routes>
+        <Route path="/DetailArticle" element={<detailArticle />} />
+      </Routes> */}
         <CreateArticle id="create"/>
         <br></br><br></br><br></br>
         {/* <ListCategory/> */}

@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "../styles/listArticle.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function ListCategory(props) {
       const [show, setShow] = useState(false);
@@ -34,7 +34,7 @@ export default function ListCategory(props) {
                         <Card.Body>
                             <Card.Title className="text-center" style={{fontWeight: "bold"}}>{product}</Card.Title>
                         </Card.Body>
-                        </Card>
+                    </Card>
                     </div>
                 )) }
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/listArticle.css";
+
 import {MdChevronRight, MdChevronLeft} from "react-icons/md";
 
 export default function ListArticle(props){
@@ -22,7 +23,7 @@ export default function ListArticle(props){
                  { 
                   props.list.map((slide,index)=>{
                           return(
-                              <div className="slider-card" key={index} onClick={()=>slide.clickEvent()}>
+                              <div className="slider-card" key={index} data-toggle="modal" data-target="#exampleModal">
                                   <p className="slider-subject">{slide.Subject}</p><br></br>
                                   <p className="slider-category">genre : {slide.Category}</p>
                                   <p className="slider-username">by : {slide.UserUsername}</p>
