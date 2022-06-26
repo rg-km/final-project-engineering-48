@@ -15,7 +15,10 @@ export default function ListArticle(props){
   
       return(
       <div className="listArticle">
-            <h1>List Article</h1>
+        <div style={{ display: "flex", justifyContent: "center", marginTop:"57px" }}>
+        <h1>List Article</h1>
+        </div> 
+            
           <div id="slider-container">
               <MdChevronLeft size={40} className="icon-left" onClick={slideLeft}/>
               <div id="slider">
