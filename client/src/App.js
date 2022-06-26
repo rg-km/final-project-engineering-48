@@ -6,7 +6,6 @@ import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { NavLink, Route, Routes, Link} from "react-router-dom";
 import ListCategory from "./components/listCategory";
-import detailArticles from "./components/detailArticle";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import DetailArticle from "./components/detailArticle";
@@ -110,11 +109,11 @@ const [listAr, setListAr] = useState([])
         <ListArticle list = {list}/>
         <br></br><br></br><br></br>
       <Routes>
-        <Route path="/ListCategory" element={<DetailArticle />} />
+        <Route path="/ListCategory" element={<ListCategory />} />
       </Routes>
-      {/* <Routes>
-        <Route path="/DetailArticle" element={<detailArticle />} />
-      </Routes> */}
+      <Routes>
+        <Route path="/DetailArticle" element={<DetailArticle />} />
+      </Routes>
         <CreateArticle id="create"/>
         <br></br><br></br><br></br>
         {/* <ListCategory/> */}

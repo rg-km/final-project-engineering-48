@@ -15,10 +15,14 @@ export default function DetailArticle(props) {
   }, []);
 
   const getProducts = async () => {
+    try {
     const response = await axios.get(
-      "http://localhost:8080/api/article/category"
+      "http://localhost:8080/api/article/detail"
     );
-    setProduct(response.data.data);
+    setProduct([response.data.data]);
+    } catch(error) {
+      console.log(error)
+    }
   };
 
   return (
@@ -42,7 +46,11 @@ export default function DetailArticle(props) {
           </Col>
           <Col md={8}>
             <Container style={{ backgroundColor: "gray", padding: "10px" }}>
-              <h1 className="mb-3">Chapter 1: Whats is Programing</h1>
+            { 
+                  products.map((slide,index)=> {
+                    return(
+              <>
+              <h1 className="mb-3">{slide}</h1>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
@@ -66,6 +74,9 @@ export default function DetailArticle(props) {
                 publishing software like Aldus PageMaker including versions of
                 Lorem Ipsum
               </p>
+              </>
+                   )})
+              }
             </Container>
           </Col>
         </Row>
