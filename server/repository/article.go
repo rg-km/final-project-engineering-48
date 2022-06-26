@@ -74,7 +74,7 @@ func (u *ArticleRepository) FetchArticle() ([]Creation, error) {
 	var creations []Creation = make([]Creation, 0)
 
 	// query untuk mengambil category article
-	sqlStmt = `SELECT c.id, u.username, u.id, c.subject, c.content, c.category, c.created_at
+	sqlStmt = `SELECT c.id, u.username, u.id, c.subject, c.category
 	FROM users u
 	LEFT JOIN creations c ON u.id = c.user_id WHERE c.status = "publish"`
 
@@ -91,9 +91,7 @@ func (u *ArticleRepository) FetchArticle() ([]Creation, error) {
 			&creation.UserUsername,
 			&creation.UserID,
 			&creation.Subject,
-			&creation.Content,
 			&creation.Category,
-			&creation.CreatedAt,
 		)
 
 		if err != nil {
