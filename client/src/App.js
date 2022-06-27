@@ -13,6 +13,8 @@ import HomePage from "./components/HomePage";
 import Reading from "./components/Reading";
 import About from "./components/About";
 import DetailArticle from "./components/detailArticle";
+import Login from "./components/login";
+import Register from "./components/register";
 
 
 function App() {
@@ -29,6 +31,9 @@ function App() {
       <Route path="reading" element={ <Reading/> } />
       <Route path="writing" element={ <CreateArticle/> } />
       <Route path="/DetailArticle" element={<DetailArticle />} />
+      <Route path="/Login" element={<Login />} />
+      <Route path="/Register" element={<Register />} />
+
     </Routes>
 
     {/* footer */}

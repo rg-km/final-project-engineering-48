@@ -51,6 +51,16 @@ export default function NavbarCom(props){
             About
           </NavLink>
         </NavItem>
+        <NavItem>
+      <NavLink href="/Login">
+        Login
+      </NavLink>
+    </NavItem>
+    <NavItem>
+      <NavLink href="/Register">
+        Register
+      </NavLink>
+    </NavItem>
       </Nav>
     </Collapse>
   </Navbar>
