@@ -4,62 +4,34 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
+<<<<<<< HEAD
 import { NavLink, Route, Routes, Link} from "react-router-dom";
 import ListCategory from "./components/listCategory";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import DetailArticle from "./components/detailArticle";
 
+=======
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import ListCategory from "./components/listCategory";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import NavbarCom from "./components/Navbar";
+import HomePage from "./components/HomePage";
+import Reading from "./components/Reading";
+import About from "./components/About";
+import DetailArticle from "./components/detailArticle";
+>>>>>>> 5b7762a2b4a3b90ee474ea9d86dbe8e768fc20b0
 
 
 function App() {
-
-//   const list = [
-//     {username: "user1", subject: "Little Mermaid",category: "fantasy"},
-//     {username: "user2", subject: "Titanic", category: "drama"},
-//     {username: "user3", subject: "The Lion King", category: "fantasy"},
-//     {username: "user4", subject: "The Little Mermaid", category: "fantasy"},
-//     {username: "user5", subject: "Titanic", category: "drama"},
-//     {username: "user6", subject: "The Lion King", category: "fantasy"},
-//     {username: "user7", subject: "The Little Mermaid", category: "fantasy"},
-//     {username: "user8", subject: "Titanic", category: "drama"},
-//     {username: "user9", subject: "The Lion King", category: "fantasy"},
-//     {username: "user10", subject: "The Little Mermaid", category: "fantasy"},
-//     {username: "user11", subject: "Titanic", category: "drama"},
-//     {username: "user12", subject: "The Lion King", category: "fantasy"},
-// ];
-
-const [listAr, setListAr] = useState([])
-
-  async function fetchArticle() {
-    try {
-      const respond = await axios.get('http://localhost:8080/api/article/list');
-      console.log(respond.data.data)
-      setListAr(respond.data.data)
-
-    } catch (error) {
-      console.log("can't fetch article", error);
-    }
-  }
-
-  useEffect(() => {
-    
-    fetchArticle()
-  }, [])
-
-  const list = listAr ; 
-  // console.log(list, "ini list postingan")
-
   const NAVBAR = {
     backgroundColor: "#F2CB8A",
   }
-
-  // const IMAGE = {
-  //   textAlign: "center",
-  //   justifyContent: "center",
-  // }
+  
   return (
     <div className="App">
+<<<<<<< HEAD
       {/* navbar */}
       <div className="main-wrappe" style={NAVBAR}>
       <nav className="navbar navbar-expand-lg navbar-dark bg-navnew static-top mb-5 shadow">
@@ -120,6 +92,19 @@ const [listAr, setListAr] = useState([])
 
         {/* footer */}
         <footer className="fixed-bottom bg-navnew" style={NAVBAR}>
+=======
+    <NavbarCom></NavbarCom>
+    <Routes>
+      <Route path="/" element={ <HomePage/> } />
+      <Route path="about" element={ <About/> } />
+      <Route path="reading" element={ <Reading/> } />
+      <Route path="writing" element={ <CreateArticle/> } />
+      <Route path="/DetailArticle" element={<DetailArticle />} />
+    </Routes>
+
+    {/* footer */}
+    <footer className="fixed-bottom bg-navnew" style={NAVBAR}>
+>>>>>>> 5b7762a2b4a3b90ee474ea9d86dbe8e768fc20b0
         <div className="text-center p-3 text-white">© Engineering48 | Ruangguru | 2022</div>
       </footer>
     </div>

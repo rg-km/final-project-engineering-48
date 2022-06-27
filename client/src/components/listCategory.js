@@ -26,6 +26,7 @@ export default function ListCategory(props) {
       return (
             <>
             <div className="container">
+                <h1>List Category</h1><br></br>
                 <div className="row">
                 { products.map((product, index) => (
                     <div className="col-md-4">
