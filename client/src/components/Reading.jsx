@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import ListArticle from "./listArticle";
 import axios from "axios";
 import ListCategory from "./listCategory";
+import DetailArticle from "./detailArticle";
 
 export default function Reading(){
 
@@ -30,7 +31,8 @@ export default function Reading(){
             <div>
                   <div className="jumbotron">
                         <ListArticle list = {list}/> <br></br><br></br>
-                        <ListCategory/>
+                        <ListCategory/><br></br>
+                        <DetailArticle/>
                   </div>
             </div>
       )

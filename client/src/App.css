@@ -1,9 +1,13 @@
 .App {
   background-color: #FAF2ED;
-  height: 1000px;
+  height: 1100px;
 }
 
 .App img {
   margin-inline: auto;
+}
+
+.jumbotron{
+  background-color: #FAF2ED;
 }
 

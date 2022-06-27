@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import axios from "axios";
 
-export default function register(props) {
+export default function Register(props) {
   const {
     register,
     handleSubmit,
@@ -13,22 +13,22 @@ export default function register(props) {
     trigger,
   } = useForm();
 
-  const onSubmit = (data) => {
-    confirmAlert({
-      title: "Konfirmasi",
-      message: "Apakah anda yakin ingin Login dengan akun ini?",
-      buttons: [
-        {
-          label: "Ya",
-          onClick: () => kirim(data), href: "/login",
-        },
-        {
-          label: "Tidak",
-          //onClick: () => alert("Click No"),
-        },
-      ],
-    });
-  };
+  // const onSubmit = (data) => {
+  //   confirmAlert({
+  //     title: "Konfirmasi",
+  //     message: "Apakah anda yakin ingin Login dengan akun ini?",
+  //     buttons: [
+  //       {
+  //         label: "Ya",
+  //         onClick: () => kirim(data), href: "/login",
+  //       },
+  //       {
+  //         label: "Tidak",
+  //         //onClick: () => alert("Click No"),
+  //       },
+  //     ],
+  //   });
+  // };
 
   const CREATE_LAYOUT = {
     backgroundColor: "#D9D9D9",
@@ -48,7 +48,7 @@ export default function register(props) {
       <div className="row justify-content-sm-center pt-5" style={WRAPPER}>
         <div className="col-sm-6 shadow round pb-3 bg-formnew" style={CREATE_LAYOUT}>
           <h1 className="text-center pt-3 text-secondary">REGISTER</h1>
-          <form onSubmit={handleSubmit(onSubmit)} className="form-inline">
+          <form  className="form-inline">
             {/* Username */}
             <div className="form-group">
               <label className="col-form-label">Username</label>

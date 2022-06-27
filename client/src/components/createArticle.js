@@ -59,7 +59,7 @@ export default function CreateArticle(props) {
   };
 
   const WRAPPER = {
-    backgroundColor: "#FAF2ED",
+    marginTop: "20px",
   };
 
   const BUTTON = {
@@ -67,7 +67,7 @@ export default function CreateArticle(props) {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={WRAPPER}>
       <div className="row justify-content-sm-center pt-5" style={WRAPPER}>
         <div className="col-sm-6 shadow round pb-3 bg-formnew" style={CREATE_LAYOUT}>
           <h1 className="text-center pt-3 text-secondary">Form Add</h1>

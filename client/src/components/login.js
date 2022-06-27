@@ -5,7 +5,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function login(props) {
+export default function Login(props) {
   const navigate = useNavigate();
   const {
     register,
@@ -45,20 +45,19 @@ export default function login(props) {
       username: mydata["username"],
       password: mydata["password"],
     };
-    axios.post(url, data, config).then(
-      (response) => {
-        if(response.status === 200){
-          console.log("SUCCESSS")
-          navigate("/Reading");
-          return response.json(); 
-      }else if(response.status === 401){
-          console.log("SOMETHING WENT WRONG")
-          this.setState({ requestFailed: true })
-      }
-    }),
-      (error) => {
-        console.log(error);
-      }
+    // axios.post(url, data, config).then(
+    //   (response) => {
+    //     if(response.status === 200){
+    //       navigate("/Reading");
+    //       return response.json(); 
+    //   }else if(response.status === 401){
+    //       console.log("SOMETHING WENT WRONG")
+    //       this.setState({ requestFailed: true })
+    //   }
+    // }),
+    //   (error) => {
+    //     console.log(error);
+    //   }
   };
 
   const CREATE_LAYOUT = {
