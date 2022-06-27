@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function register(props) {
   const {
@@ -20,7 +21,7 @@ export default function register(props) {
       buttons: [
         {
           label: "Ya",
-          onClick: () => kirim(data), href: "/login",
+          onClick: () => kirim(data),
         },
         {
           label: "Tidak",
@@ -29,6 +30,36 @@ export default function register(props) {
       ],
     });
   };
+  const kirim = (mydata) => {
+    let url = "http://localhost:8080/api/registrasi";
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+      },
+    };
+    let data = {
+      username: mydata["username"],
+      email: mydata["email"],
+      password: mydata["password"],
+    };
+    axios.post(url, data, config).then(
+      (response) => {
+        if(response.status === 200){
+          console.log("SUCCESSS")
+          navigate("/Reading");
+          return response.json(); 
+      }else if(response.status === 401){
+          console.log("SOMETHING WENT WRONG")
+          this.setState({ requestFailed: true })
+      }
+    }),
+      (error) => {
+        console.log(error);
+      }
+  };
+
 
   const CREATE_LAYOUT = {
     backgroundColor: "#D9D9D9",

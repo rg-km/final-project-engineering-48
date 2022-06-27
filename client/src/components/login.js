@@ -22,7 +22,7 @@ export default function login(props) {
       buttons: [
         {
           label: "Ya",
-          onClick: () => kirim(data), href: "/Reading",
+          onClick: () => kirim(data), 
         },
         {
           label: "Tidak",
