@@ -17,7 +17,7 @@ export default function ListArticle(props){
       <div className="listArticle">
         <div style={{ display: "flex", justifyContent: "center", marginTop:"57px" }}>
         <h1>List Article</h1>
-        </div> 
+        </div><br></br>
             
           <div id="slider-container">
               <MdChevronLeft size={40} className="icon-left" onClick={slideLeft}/>
@@ -25,10 +25,13 @@ export default function ListArticle(props){
                  { 
                   props.list.map((slide,index)=>{
                           return(
-                              <div className="slider-card" key={index} onClick={()=>slide.clickEvent()}>
+                              <div className="slider-card" key={index} data-toggle="modal" data-target="#exampleModal">
                                   <p className="slider-subject">{slide.Subject}</p><br></br>
                                   <p className="slider-category">genre : {slide.Category}</p>
                                   <p className="slider-username">by : {slide.UserUsername}</p>
+                                  {/* <div>
+                                    <article className="slider-content">{slide.Content}</article>
+                                  </div> */}
                               </div>
                           )
                       })
@@ -39,3 +42,4 @@ export default function ListArticle(props){
       </div>
       )
   }
+
