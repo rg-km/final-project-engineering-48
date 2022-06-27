@@ -12,6 +12,7 @@ import NavbarCom from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import Reading from "./components/Reading";
 import About from "./components/About";
+import DetailArticle from "./components/detailArticle";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path="about" element={ <About/> } />
       <Route path="reading" element={ <Reading/> } />
       <Route path="writing" element={ <CreateArticle/> } />
+      <Route path="/DetailArticle" element={<DetailArticle />} />
     </Routes>
 
     {/* footer */}
